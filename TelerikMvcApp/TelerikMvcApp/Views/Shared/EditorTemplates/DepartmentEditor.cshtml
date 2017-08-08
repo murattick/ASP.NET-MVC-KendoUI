@@ -1,0 +1,9 @@
+﻿@model TelerikMvcApp.Models.Department
+
+@(Html.Kendo().DropDownList().Name("Department")
+    .DataTextField("Title")
+    .DataValueField("DepartmentId")
+    .DataSource(d => d
+        .Read(r => r.Action("Index", "Home"))
+    )
+)

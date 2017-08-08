@@ -1,0 +1,30 @@
+﻿
+@(Html.Kendo().Grid<TelerikMvcApp.Models.User>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Name);
+          columns.ForeignKey(p => p.DepartmentId, (System.Collections.IEnumerable)ViewData["defaultDepatment"], "DepartmentId", "Title").Title("Department");
+          columns.ForeignKey(p => p.AddressId, (System.Collections.IEnumerable)ViewData["defaultAddress"], "AddressId", "City").Title("City");
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+          toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Users_Read", "Home"))
+          .Create(create => create.Action("Users_Create", "Home"))
+          .Update(update => update.Action("Users_Update", "Home"))
+          .Destroy(destroy => destroy.Action("Users_Destroy", "Home"))
+     
+      )
+)

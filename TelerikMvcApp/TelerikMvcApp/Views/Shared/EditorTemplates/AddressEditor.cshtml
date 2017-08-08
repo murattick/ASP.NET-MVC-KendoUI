@@ -1,0 +1,9 @@
+﻿@model TelerikMvcApp.Areas.Address.Models.Address
+
+@(Html.Kendo().DropDownList().Name("Address")
+    .DataTextField("Sity")
+    .DataValueField("AddressId")
+    .DataSource(d => d
+        .Read(r => r.Action("Index", "Home"))
+    )
+)
